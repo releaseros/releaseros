@@ -1,0 +1,25 @@
+initial_release_message: | 
+  Initial Release
+sort: asc
+filters:
+  exclude:
+    - '^test:'
+    - '^ci:'
+    - 'merge conflict'
+    - Merge pull request
+    - Merge remote-tracking branch
+    - Merge branch
+categories:
+  - title: 'Features'
+    regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+    weight: 10
+  - title: 'Fixes'
+    regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
+    weight: 20
+  - title: 'Documentation'
+    regexp: '^.*?docs(\([[:word:]]+\))??!?:.+$'
+    weight: 30
+  - title: Others
+    weight: 9999
+footer: |
+  **Full Changelog**: https://CHANGEME/-/compare/{{ .PreviousTag }}...{{ .LatestTag }}

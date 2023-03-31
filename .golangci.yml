@@ -1,0 +1,37 @@
+run:
+  go: 1.19
+linters:
+  enable:
+    - bidichk
+    - containedctx
+    - contextcheck
+    - depguard
+    - gofumpt
+    - gosec
+    - misspell
+    - prealloc
+    - reassign
+    - revive
+    - tagliatelle
+    - thelper
+    - tparallel
+    - unconvert
+    - unparam
+    - wastedassign
+    - whitespace
+
+linters-settings:
+  gofumpt:
+    module-path: releaseros
+  tagliatelle:
+    case:
+      use-field-name: false
+      rules:
+        yaml: snake
+        json: snake
+
+issues:
+  exclude-rules:
+    - path: '(.+)_test\.go'
+      linters:
+        - revive
