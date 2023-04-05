@@ -7,6 +7,7 @@ builds:
     goos:
       - linux
       - darwin
+      - windows
 
 archives:
   - format: tar.gz
@@ -24,27 +25,63 @@ snapshot:
   name_template: "{{ incpatch .Version }}-next"
 changelog:
   sort: asc
+  use: github
   filters:
     exclude:
-      - '^docs:'
       - '^test:'
       - '^ci:'
+      - '^chore:'
       - 'merge conflict'
       - Merge pull request
       - Merge remote-tracking branch
       - Merge branch
   groups:
-    - title: 'New Features'
+    - title: 'Features'
       regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
       order: 100
-    - title: 'Bug fixes'
+    - title: 'Fixes'
       regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
       order: 200
     - title: 'Documentation updates'
       regexp: ^.*?docs(\([[:word:]]+\))??!?:.+$
       order: 400
-    - title: Other work
+    - title: 'Other work'
       order: 9999
+
+dockers:
+- image_templates:
+  - "releaseros/releaseros:{{ .Version }}-amd64"
+  - "ghcr.io/releaseros/releaseros:{{ .Version }}-amd64"
+  use: buildx
+  dockerfile: Dockerfile
+  build_flag_templates:
+  - "--platform=linux/amd64"
+- image_templates:
+  - "releaseros/releaseros:{{ .Version }}-arm64"
+  - "ghcr.io/releaseros/releaseros:{{ .Version }}-arm64"
+  use: buildx
+  goarch: arm64
+  dockerfile: Dockerfile
+  build_flag_templates:
+  - "--platform=linux/arm64"
+
+docker_manifests:
+- name_template: "ghcr.io/releaseros/releaseros:{{ .Version }}"
+  image_templates:
+  - "ghcr.io/releaseros/releaseros:{{ .Version }}-amd64"
+  - "ghcr.io/releaseros/releaseros:{{ .Version }}-arm64"
+- name_template: "ghcr.io/releaseros/releaseros:latest"
+  image_templates:
+  - "ghcr.io/releaseros/releaseros:{{ .Version }}-amd64"
+  - "ghcr.io/releaseros/releaseros:{{ .Version }}-arm64"
+- name_template: "releaseros/releaseros:{{ .Version }}"
+  image_templates:
+  - "releaseros/releaseros:{{ .Version }}-amd64"
+  - "releaseros/releaseros:{{ .Version }}-arm64"
+- name_template: "releaseros/releaseros:latest"
+  image_templates:
+  - "releaseros/releaseros:{{ .Version }}-amd64"
+  - "releaseros/releaseros:{{ .Version }}-arm64"
 
 # The lines beneath this are called `modelines`. See `:help modeline`.
 # yaml-language-server: $schema=https://goreleaser.com/static/schema.json
