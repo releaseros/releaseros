@@ -138,7 +138,7 @@ Creating a tool that match my expectations was on my mind from a long time.
 Then one day, I discovered [GoReleaser](https://github.com/goreleaser/goreleaser).
 I was blown away by it!
 
-On other projects that cannot used it (not Go projects), I was frustating by either having to manually create the release note, or using my good old `awk` script.
+On other projects that cannot used it (not Go projects), I was frustated by either having to manually create the release note, or using my good old `awk` script.
 
 So for fun and to continue my learning of [Go](https://go.dev/) this project was created!
 It is based on what my good old `awk` script did and on what [GoReleaser](https://github.com/goreleaser/goreleaser) have to propose when generating a release note.
