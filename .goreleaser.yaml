@@ -9,6 +9,11 @@ builds:
       - darwin
       - windows
 
+env:
+  - OCI_DESCRIPTION="Generate a release note based on Git repository."
+  - OCI_AUTHORS=beram.job@gmail.com
+  - OCI_LICENCES=GPL-3.0-or-later
+
 archives:
   - format: tar.gz
     # this name template makes the OS and Arch compatible with the results of uname.
@@ -55,6 +60,15 @@ dockers:
   use: buildx
   dockerfile: Dockerfile
   build_flag_templates:
+  - "--label=org.opencontainers.artifact.created={{.Date}}"
+  - "--label=org.opencontainers.artifact.description={{.Env.OCI_DESCRIPTION}}"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.authors={{.Env.OCI_AUTHORS}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--label=org.opencontainers.image.version={{.Version}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.licenses={{.Env.OCI_LICENCES}}"
+  - "--label=org.opencontainers.image.title={{.ProjectName}}"
   - "--platform=linux/amd64"
 - image_templates:
   - "releaseros/releaseros:{{ .Version }}-arm64"
@@ -63,6 +77,15 @@ dockers:
   goarch: arm64
   dockerfile: Dockerfile
   build_flag_templates:
+  - "--label=org.opencontainers.artifact.created={{.Date}}"
+  - "--label=org.opencontainers.artifact.description={{.Env.OCI_DESCRIPTION}}"
+  - "--label=org.opencontainers.image.created={{.Date}}"
+  - "--label=org.opencontainers.image.authors={{.Env.OCI_AUTHORS}}"
+  - "--label=org.opencontainers.image.source={{.GitURL}}"
+  - "--label=org.opencontainers.image.version={{.Version}}"
+  - "--label=org.opencontainers.image.revision={{.FullCommit}}"
+  - "--label=org.opencontainers.image.licenses={{.Env.OCI_LICENCES}}"
+  - "--label=org.opencontainers.image.title={{.ProjectName}}"
   - "--platform=linux/arm64"
 
 docker_manifests:
