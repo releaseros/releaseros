@@ -90,13 +90,16 @@ stages:
 
 generate:
   stage: generate
-   image:
+    image:
     name: releaseros/releaseros:latest # remember to always pin a specific version
     entrypoint: ['']
   script:
     - releaseros generate > releasenote.md
   rules:
     - if: $CI_COMMIT_TAG
+  variables:
+    # Disable shallow cloning so that releaseros can diff between tags.
+    GIT_DEPTH: 0
   artifacts:
     paths:
       - releasenote.md
