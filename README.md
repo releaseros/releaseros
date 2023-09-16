@@ -67,13 +67,13 @@ filters:
     - Merge branch
 categories:
   - title: 'Features'
-    regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+    regexp: '^.*?feat(\([\w'-]+\))??!?:.+$'
     weight: 10
   - title: 'Fixes'
-    regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
+    regexp: '^.*?fix(\([\w'-]+\))??!?:.+$'
     weight: 20
   - title: 'Documentation'
-    regexp: '^.*?docs(\([[:word:]]+\))??!?:.+$'
+    regexp: '^.*?docs(\([\w'-]+\))??!?:.+$'
     weight: 30
   - title: Others
     weight: 9999
