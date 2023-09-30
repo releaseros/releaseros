@@ -55,13 +55,13 @@ filters:
     - Merge branch
 categories:
   - title: 'Features'
-    regexp: '^.*?feat(\([[:word:]]+\))??!?:.+$'
+    regexp: '^.*?feat(\([[:word:]-]+\))??!?:.+$'
     weight: 1
   - title: 'Fixes'
-    regexp: '^.*?fix(\([[:word:]]+\))??!?:.+$'
+    regexp: '^.*?fix(\([[:word:]-]+\))??!?:.+$'
     weight: 2
   - title: 'Documentation'
-    regexp: ^.*?docs(\([[:word:]]+\))??!?:.+$
+    regexp: ^.*?docs(\([[:word:]-]+\))??!?:.+$
     weight: 3
   - title: Others
     weight: 9999
@@ -126,17 +126,17 @@ func ExpectedConfig() Config {
 		Categories: []Category{
 			{
 				Title:  "Features",
-				Regexp: `^.*?feat(\([[:word:]]+\))??!?:.+$`,
+				Regexp: `^.*?feat(\([[:word:]-]+\))??!?:.+$`,
 				Weight: 1,
 			},
 			{
 				Title:  "Fixes",
-				Regexp: `^.*?fix(\([[:word:]]+\))??!?:.+$`,
+				Regexp: `^.*?fix(\([[:word:]-]+\))??!?:.+$`,
 				Weight: 2,
 			},
 			{
 				Title:  "Documentation",
-				Regexp: `^.*?docs(\([[:word:]]+\))??!?:.+$`,
+				Regexp: `^.*?docs(\([[:word:]-]+\))??!?:.+$`,
 				Weight: 3,
 			},
 			{

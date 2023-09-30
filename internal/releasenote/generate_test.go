@@ -152,17 +152,17 @@ func TestGenerate(t *testing.T) {
 				Categories: []config.Category{
 					{
 						Title:  "Features",
-						Regexp: `^.*?feat(\([[:word:]]+\))??!?:.+$`,
+						Regexp: `^.*?feat(\([[:word:]-]+\))??!?:.+$`,
 						Weight: 1,
 					},
 					{
 						Title:  "Fixes",
-						Regexp: `^.*?fix(\([[:word:]]+\))??!?:.+$`,
+						Regexp: `^.*?fix(\([[:word:]-]+\))??!?:.+$`,
 						Weight: 2,
 					},
 					{
 						Title:  "Documentation",
-						Regexp: `^.*?docs(\([[:word:]]+\))??!?:.+$`,
+						Regexp: `^.*?docs(\([[:word:]-]+\))??!?:.+$`,
 						Weight: 3,
 					},
 					{
@@ -373,22 +373,22 @@ func TestGenerate(t *testing.T) {
 				Categories: []config.Category{
 					{
 						Title:  "BREAKING CHANGES / Features",
-						Regexp: `^.*?feat(\([[:word:]]+\))??!+:.+$`,
+						Regexp: `^.*?feat(\([[:word:]-]+\))??!+:.+$`,
 						Weight: 1,
 					},
 					{
 						Title:  "Features",
-						Regexp: `^.*?feat(\([[:word:]]+\))??!{0}:.+$`,
+						Regexp: `^.*?feat(\([[:word:]-]+\))??!{0}:.+$`,
 						Weight: 2,
 					},
 					{
 						Title:  "Fixes",
-						Regexp: `^.*?fix(\([[:word:]]+\))??!?:.+$`,
+						Regexp: `^.*?fix(\([[:word:]-]+\))??!?:.+$`,
 						Weight: 3,
 					},
 					{
 						Title:  "Documentation",
-						Regexp: `^.*?docs(\([[:word:]]+\))??!?:.+$`,
+						Regexp: `^.*?docs(\([[:word:]-]+\))??!?:.+$`,
 						Weight: 4,
 					},
 					{
