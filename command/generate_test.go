@@ -64,6 +64,7 @@ func TestGenerate(t *stdtesting.T) {
 	testing.GitCommit(t, "feat: does it work? maybe. will I check? no")
 	testing.GitCommit(t, "chore: don't ask me")
 	testing.GitCommit(t, "test: I cannot believe that it took this long to write a test for this")
+	testing.GitCommit(t, "feat(check-in): LOTS of changes. period")
 
 	testing.GitAnnotatedTag(t, "v1.1.0", "second release")
 
@@ -72,6 +73,7 @@ func TestGenerate(t *stdtesting.T) {
 
 ### Features
 
+\* ([a-z0-9]){7} feat\(check\-in\): LOTS of changes. period
 \* ([a-z0-9]){7} feat: commit 2
 \* ([a-z0-9]){7} feat: does it work\? maybe\. will I check\? no
 \* ([a-z0-9]){7} feat: what happens in vegas stays in vegas

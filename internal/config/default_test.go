@@ -40,17 +40,17 @@ func TestDefaultConfigIsLoadable(t *testing.T) {
 			Categories: []Category{
 				{
 					Title:  "Features",
-					Regexp: `^.*?feat(\([[:word:]]+\))??!?:.+$`,
+					Regexp: `^.*?feat(\([[:word:]-]+\))??!?:.+$`,
 					Weight: 10,
 				},
 				{
 					Title:  "Fixes",
-					Regexp: `^.*?fix(\([[:word:]]+\))??!?:.+$`,
+					Regexp: `^.*?fix(\([[:word:]-]+\))??!?:.+$`,
 					Weight: 20,
 				},
 				{
 					Title:  "Documentation",
-					Regexp: `^.*?docs(\([[:word:]]+\))??!?:.+$`,
+					Regexp: `^.*?docs(\([[:word:]-]+\))??!?:.+$`,
 					Weight: 30,
 				},
 				{
