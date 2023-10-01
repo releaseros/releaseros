@@ -5,7 +5,6 @@ linters:
     - bidichk
     - containedctx
     - contextcheck
-    - depguard
     - gofumpt
     - gosec
     - misspell

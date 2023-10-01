@@ -1,12 +1,12 @@
 package releasenote
 
 import (
+	"context"
 	"errors"
 	"os"
 	"testing"
 
 	"releaseros/internal/config"
-	"releaseros/internal/context"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -18,11 +18,11 @@ type gitTagFinderMock struct {
 	previousTagError error
 }
 
-func (mock gitTagFinderMock) LatestTag(ctx *context.Context) (string, error) {
+func (mock gitTagFinderMock) LatestTag(ctx context.Context) (string, error) {
 	return mock.latestTag, mock.latestTagError
 }
 
-func (mock gitTagFinderMock) PreviousTag(ctx *context.Context, latestTag string) (string, error) {
+func (mock gitTagFinderMock) PreviousTag(ctx context.Context, latestTag string) (string, error) {
 	return mock.previousTag, mock.previousTagError
 }
 
@@ -31,11 +31,11 @@ type gitLogFinderMock struct {
 	err  error
 }
 
-func (mock gitLogFinderMock) LogTo(ctx *context.Context, latestTag string) (string, error) {
+func (mock gitLogFinderMock) LogTo(ctx context.Context, latestTag string) (string, error) {
 	return mock.logs, mock.err
 }
 
-func (mock gitLogFinderMock) Log(ctx *context.Context, previousTag, latestTag string) (string, error) {
+func (mock gitLogFinderMock) Log(ctx context.Context, previousTag, latestTag string) (string, error) {
 	return mock.logs, mock.err
 }
 
@@ -434,7 +434,7 @@ func TestGenerate(t *testing.T) {
 					logs: item.logs,
 				},
 			}
-			actual, err := releaseNoteGenerator.Generate(context.New(item.config))
+			actual, err := releaseNoteGenerator.Generate(context.TODO(), item.config)
 			assert.NoError(t, err)
 			assert.Equal(t, item.expected, actual)
 		})
@@ -493,7 +493,7 @@ func TestError(t *testing.T) {
 					err:  item.logsError,
 				},
 			}
-			_, err := releaseNoteGenerator.Generate(context.New(item.config))
+			_, err := releaseNoteGenerator.Generate(context.TODO(), item.config)
 			assert.Error(t, err)
 		})
 	}

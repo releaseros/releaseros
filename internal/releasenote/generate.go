@@ -1,9 +1,10 @@
 package releasenote
 
 import (
+	"context"
 	"strings"
 
-	"releaseros/internal/context"
+	"releaseros/internal/config"
 	"releaseros/internal/markdown"
 
 	"github.com/rs/zerolog"
@@ -22,7 +23,7 @@ func NewGenerator() Generator {
 	}
 }
 
-func (releaseNoteGenerator Generator) Generate(ctx *context.Context) (string, error) {
+func (releaseNoteGenerator Generator) Generate(ctx context.Context, config config.Config) (string, error) {
 	latestTag, err := releaseNoteGenerator.gitTagFinder.LatestTag(ctx)
 	if err != nil {
 		return "", err
@@ -35,8 +36,8 @@ func (releaseNoteGenerator Generator) Generate(ctx *context.Context) (string, er
 
 	var log string
 	if previousTag == "" {
-		if ctx.Config.InitialReleaseMessage != "" {
-			return ctx.Config.InitialReleaseMessage, nil
+		if config.InitialReleaseMessage != "" {
+			return config.InitialReleaseMessage, nil
 		}
 
 		log, err = releaseNoteGenerator.gitLogFinder.LogTo(ctx, latestTag)
@@ -49,12 +50,12 @@ func (releaseNoteGenerator Generator) Generate(ctx *context.Context) (string, er
 	logger.Debug().Str("log", log).Msg("")
 
 	var footerString string
-	if ctx.Config.Footer != "" {
+	if config.Footer != "" {
 		footer := Footer{
 			LatestTag:   latestTag,
 			PreviousTag: previousTag,
 		}
-		footerString, err = footer.Generate(ctx)
+		footerString, err = footer.Generate(config)
 		if err != nil {
 			return "", err
 		}
@@ -76,24 +77,24 @@ func (releaseNoteGenerator Generator) Generate(ctx *context.Context) (string, er
 	}
 	logger.Debug().Array("records", records).Msg("")
 
-	records, err = records.Filter(ctx)
+	records, err = records.Filter(config)
 	if err != nil {
 		return "", err
 	}
 	logger.Debug().Array("filtered records", records).Msg("")
 
-	records = records.Sort(ctx)
+	records = records.Sort(config)
 	logger.Debug().Array("sorted records", records).Msg("")
 
 	releaseNote := releaseNote{
 		title:   "Release Note",
 		records: records,
 	}
-	if len(ctx.Config.Categories) == 0 {
+	if len(config.Categories) == 0 {
 		return releaseNote.String() + footerString, nil
 	}
 
-	categories, err := categories(ctx, records)
+	categories, err := categories(config, records)
 	if err != nil {
 		return "", err
 	}
