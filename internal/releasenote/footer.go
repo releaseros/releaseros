@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"text/template"
 
-	"releaseros/internal/context"
+	"releaseros/internal/config"
 )
 
 type Footer struct {
@@ -12,9 +12,9 @@ type Footer struct {
 	PreviousTag string
 }
 
-func (footer Footer) Generate(ctx *context.Context) (string, error) {
+func (footer Footer) Generate(config config.Config) (string, error) {
 	var out bytes.Buffer
-	footerText := ctx.Config.Footer
+	footerText := config.Footer
 
 	t, err := template.New("footer").Parse(footerText)
 	if err != nil {

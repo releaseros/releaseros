@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"sort"
 
-	"releaseros/internal/context"
+	"releaseros/internal/config"
 
 	"github.com/rs/zerolog"
 )
@@ -37,9 +37,9 @@ func (r releaseNoteCategories) MarshalZerologArray(a *zerolog.Array) {
 	}
 }
 
-func categories(ctx *context.Context, records Records) (releaseNoteCategories, error) {
+func categories(config config.Config, records Records) (releaseNoteCategories, error) {
 	categories := releaseNoteCategories{}
-	for _, categoryFromConfig := range ctx.Config.Categories {
+	for _, categoryFromConfig := range config.Categories {
 		category := releaseNoteCategory{
 			title:   categoryFromConfig.Title,
 			records: Records{},

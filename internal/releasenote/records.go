@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"sort"
 
-	"releaseros/internal/context"
+	"releaseros/internal/config"
 
 	"github.com/rs/zerolog"
 )
@@ -21,8 +21,8 @@ func (record Record) String() string {
 
 type Records []Record
 
-func (records Records) Filter(ctx *context.Context) (Records, error) {
-	for _, filter := range ctx.Config.Filters.Exclude {
+func (records Records) Filter(config config.Config) (Records, error) {
+	for _, filter := range config.Filters.Exclude {
 		regexp, err := regexp.Compile(filter)
 		if err != nil {
 			return records, err
@@ -43,8 +43,8 @@ func (records Records) deleteMatchedMessage(filter *regexp.Regexp) Records {
 	return result
 }
 
-func (records Records) Sort(ctx *context.Context) Records {
-	direction := ctx.Config.Sort
+func (records Records) Sort(config config.Config) Records {
+	direction := config.Sort
 	if direction == "" {
 		return records
 	}

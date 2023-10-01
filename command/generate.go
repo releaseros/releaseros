@@ -1,10 +1,10 @@
 package command
 
 import (
+	"context"
 	"fmt"
 
 	"releaseros/internal/config"
-	"releaseros/internal/context"
 	"releaseros/internal/releasenote"
 
 	commandline "releaseros/internal/cli"
@@ -58,9 +58,7 @@ func generate(clictx *cli.Context) error {
 		return err
 	}
 
-	ctx := context.New(config)
-
-	releaseNote, err := releasenote.NewGenerator().Generate(ctx)
+	releaseNote, err := releasenote.NewGenerator().Generate(context.TODO(), config)
 	if err != nil {
 		return err
 	}
