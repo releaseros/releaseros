@@ -1,11 +1,12 @@
-# Releaseros - Release Note Generator
+<div align="center">
+  <img alt="Releaseros Logo" src="https://avatars.githubusercontent.com/u/129536677?v=3&s=280" height="140"/>
+  <h1>Releaseros - Release Note Generator</h1>
+</div>
 
 [![Tests](https://github.com/releaseros/releaseros/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/releaseros/releaseros/actions?workflow=tests)
 [![License](https://img.shields.io/github/license/releaseros/releaseros)](/LICENSE)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/releaseros/releaseros)](https://github.com/releaseros/releaseros/releases/latest)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-blue.svg?style=flat)](https://conventionalcommits.org)
-
-🚧 WIP 🚧
 
 Generate a release note based on Git repository.
 
@@ -125,7 +126,7 @@ And you will obtain something like the following image
 
 ## TODOs
 
-- [ ] logo of Gene the Releaseros
+- [x] logo of Gene the Releaseros
 - [ ] write documentation
 
 ## Contributing
