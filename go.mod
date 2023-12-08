@@ -5,7 +5,7 @@ go 1.21
 require (
 	github.com/rs/zerolog v1.31.0
 	github.com/stretchr/testify v1.8.4
-	github.com/urfave/cli/v2 v2.25.7
+	github.com/urfave/cli/v2 v2.26.0
 	gopkg.in/yaml.v2 v2.4.0
 )
 
