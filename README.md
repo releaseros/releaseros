@@ -30,6 +30,8 @@ $ releaseros generate
 
 That's it!
 
+See the [documentation](docs/README.md) or the example below for more information.
+
 ## Prerequisites
 
 You need to have [Git](https://git-scm.com/) installed.
@@ -123,11 +125,6 @@ release_job:
 And you will obtain something like the following image
 
 ![releaseros combined with gitlab](/.github/img/releaseros-gitlab-release-example.png)
-
-## TODOs
-
-- [x] logo of Gene the Releaseros
-- [ ] write documentation
 
 ## Contributing
 
