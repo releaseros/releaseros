@@ -16,7 +16,7 @@ func (footer Footer) Generate(config config.Config) (string, error) {
 	var out bytes.Buffer
 	footerText := config.Footer
 
-	t, err := template.New("footer").Parse(footerText)
+	t, err := template.New("footer").Funcs(FunctionsForTemplate).Parse(footerText)
 	if err != nil {
 		return "", err
 	}

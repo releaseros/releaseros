@@ -85,4 +85,14 @@ Two placeholders are available:
 * `PreviousTag`: the previous tag.
 * `LatestTag`: the latest tag.
 
-Example: `**Full Changelog**: https://my-gitlab.com/my-project/-/compare/{{ .PreviousTag }}...{{ .LatestTag }}`
+Functions may be used:
+
+* `{{ env "FOO" }}`: the value of the environment variable `FOO`. If the environment variable is not set, an empty string will be used.
+* `{{ envOr "FOO" "fallback value" }}`: the value of the environment variable `FOO` or `fallback value` if `FOO` is not set.
+* `{{ envOrError "FOO" }}`: the value of the environment variable `FOO` or an error if `FOO` is not set.
+
+Example:
+
+```
+**Full Changelog**: https://{{ env "HOST" }}/my-project/-/compare/{{ .PreviousTag }}...{{ .LatestTag }}
+```
