@@ -48,7 +48,7 @@ jobs:
       -
         name: GoReleaser Snapshot
         if: ${{ github.ref == 'refs/heads/main' }}
-        uses: goreleaser/goreleaser-action@9c156ee8a17a598857849441385a2041ef570552 # v6.3.0
+        uses: goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a # v6.4.0
         with:
           distribution: goreleaser
           version: v1.17.0
@@ -58,7 +58,7 @@ jobs:
       -
         name: GoReleaser
         if: ${{ startsWith(github.ref, 'refs/tags/v') }}
-        uses: goreleaser/goreleaser-action@9c156ee8a17a598857849441385a2041ef570552 # v6.3.0
+        uses: goreleaser/goreleaser-action@e435ccd777264be153ace6237001ef4d979d3a7a # v6.4.0
         with:
           distribution: goreleaser
           version: v1.17.0
