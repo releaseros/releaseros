@@ -58,13 +58,14 @@ func GitSwitchAndCreateBranch(tb testing.TB, name string) {
 }
 
 func gitExec(args ...string) (string, error) {
-	allArgs := []string{
+	allArgs := make([]string, 0, 10+len(args))
+	allArgs = append(allArgs,
 		"-c", "user.name='releaseros'",
 		"-c", "user.email='test@releaseros'",
 		"-c", "commit.gpgSign=false",
 		"-c", "tag.gpgSign=false",
 		"-c", "log.showSignature=false",
-	}
+	)
 	allArgs = append(allArgs, args...)
 	return git.Exec(context.Background(), allArgs...)
 }

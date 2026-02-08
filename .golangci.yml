@@ -1,11 +1,11 @@
+version: "2"
 run:
-  go: '1.24'
+  go: "1.24"
 linters:
   enable:
     - bidichk
     - containedctx
     - contextcheck
-    - gofumpt
     - gosec
     - misspell
     - prealloc
@@ -18,19 +18,37 @@ linters:
     - unparam
     - wastedassign
     - whitespace
-
-linters-settings:
-  gofumpt:
-    module-path: releaseros
-  tagliatelle:
-    case:
-      use-field-name: false
-      rules:
-        yaml: snake
-        json: snake
-
-issues:
-  exclude-rules:
-    - path: '(.+)_test\.go'
-      linters:
-        - revive
+  settings:
+    tagliatelle:
+      case:
+        rules:
+          json: snake
+          yaml: snake
+        use-field-name: false
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - revive
+        path: (.+)_test\.go
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofumpt
+  settings:
+    gofumpt:
+      module-path: releaseros
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
