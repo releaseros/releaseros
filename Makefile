@@ -1,16 +1,24 @@
 TESTS_RESULTS_FOLDER:=build/tests
-GOLANGCI_LINT_EXECUTABLE:="$(shell go env GOPATH)/bin/golangci-lint"
+TOOLS_FOLDER:=tools
+GOLANGCI_LINT_EXECUTABLE:="$(TOOLS_FOLDER)/golangci-lint"
+GOLANGCI_LINT_VERSION_REQUIRED="$(shell cat .golangci.version)"
 
 .PHONY: install
 install:
 	go mod tidy
 
+tools/golangci-lint:
+	@echo "Installing golangci-lint v$(GOLANGCI_LINT_VERSION_REQUIRED)..."
+	mkdir -p $(TOOLS_FOLDER)
+	curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b $(TOOLS_FOLDER) $(GOLANGCI_LINT_VERSION_REQUIRED)
+	$(GOLANGCI_LINT_EXECUTABLE) version
+
 .PHONY: lint-fix
-lint-fix:
+lint-fix: tools/golangci-lint
 	$(GOLANGCI_LINT_EXECUTABLE) run --fix
 
 .PHONY: lint
-lint:
+lint: tools/golangci-lint
 	$(GOLANGCI_LINT_EXECUTABLE) run
 
 .PHONY: tests
